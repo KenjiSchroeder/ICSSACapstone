@@ -120,3 +120,6 @@ emerging_developing_asia_economies_plot <- plot(emerging_developing_asia_economi
 
 #coreletorrelation test
 cor_test <- cor.test(imf_clean$inflation_avg_cpi_pct,imf_clean$unemployment_rate_pct)
+
+#Anova test (no idea the function to put in here)
+#aov_test <- summary(aov(unemployment_rate_pct ~ c(advanced_economies,emerging_europe_economies,latam_caribbean_economies,mena_central_asia_economies,sub_saharan_africa_economies,emerging_developing_asia_economies), imf_clean))
