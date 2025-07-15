@@ -122,4 +122,47 @@ emerging_developing_asia_economies_plot <- plot(emerging_developing_asia_economi
 cor_test <- cor.test(imf_clean$inflation_avg_cpi_pct,imf_clean$unemployment_rate_pct)
 
 #Anova test (no idea the function to put in here)
-#aov_test <- summary(aov(unemployment_rate_pct ~ c(advanced_economies,emerging_europe_economies,latam_caribbean_economies,mena_central_asia_economies,sub_saharan_africa_economies,emerging_developing_asia_economies), imf_clean))
+aov_test <- aov(unemployment_rate_pct ~ region, imf_clean)
+sum_aov_test <- summary(aov_test) 
+
+#Task 12 optional
+
+plot(y= imf_clean$ihs_inflation,x =imf_clean$ihs_unemployment)
+best_fit_nojob_inflation <- lm(imf_clean$ihs_inflation ~ imf_clean$ihs_unemployment)
+abline(best_fit_nojob_inflation, col = "red", lwd = 2)
+
+
+#extra code that separates the above graph into decades for further analysis ---------------------------------------
+decade_1 <- subset(imf_clean, (1980 <= imf_clean$year & imf_clean$year < 1990))
+decade_2 <- subset(imf_clean, (1990 <= imf_clean$year & imf_clean$year < 2000))
+decade_3 <- subset(imf_clean, (2000 <= imf_clean$year & imf_clean$year < 2010))
+decade_4 <- subset(imf_clean, (2010 <= imf_clean$year & imf_clean$year < 2025))
+
+par(mfrow = c(2,2))
+plot(y= decade_1$ihs_inflation,x =decade_1$ihs_unemployment)
+best_fit_nojob_inflation_d1 <- lm(decade_1$ihs_inflation ~ decade_1$ihs_unemployment)
+abline(best_fit_nojob_inflation_d1, col = "red", lwd = 2)
+plot(y= decade_2$ihs_inflation,x =decade_2$ihs_unemployment)
+best_fit_nojob_inflation_d2 <- lm(decade_2$ihs_inflation ~ decade_2$ihs_unemployment)
+abline(best_fit_nojob_inflation_d2, col = "red", lwd = 2)
+plot(y= decade_3$ihs_inflation,x =decade_3$ihs_unemployment)
+best_fit_nojob_inflation_d3 <- lm(decade_3$ihs_inflation ~ decade_3$ihs_unemployment)
+abline(best_fit_nojob_inflation_d3, col = "red", lwd = 2)
+plot(y= decade_4$ihs_inflation,x =decade_4$ihs_unemployment)
+best_fit_nojob_inflation_d4 <- lm(decade_4$ihs_inflation ~ decade_4$ihs_unemployment)
+abline(best_fit_nojob_inflation_d4, col = "red", lwd = 2)
+# ------------------------------------------------------------------------------------------------------------------
+
+advanced_regr <- lm(ihs_inflation ~ region * ihs_unemployment + ihs_debt, data = imf_clean)
+
+
+
+# conclusions
+# 1. key regional differences:
+    # 
+# 2. hypothesis test results:
+    # 
+# 3. modeling insights:
+    # 
+# 4. implications:
+    # 
