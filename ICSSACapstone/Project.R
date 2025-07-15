@@ -1,7 +1,7 @@
 # UnemployedInflation
 imf_data <- read.csv("IMF_WEO_imputed.csv")
 # importing data
-imf_clean <- subset(imf_data, imf_data$inflation_avg_cpi_pct >-0.2 & imf_data$inflation_avg_cpi_pct < 1)
+imf_clean <- subset(imf_data, imf_data$inflation_avg_cpi_pct >-2 & imf_data$inflation_avg_cpi_pct < 100)
 # cleaning data
 
 
@@ -155,7 +155,15 @@ abline(best_fit_nojob_inflation_d4, col = "red", lwd = 2)
 
 advanced_regr <- lm(ihs_inflation ~ region * ihs_unemployment + ihs_debt, data = imf_clean)
 
+#extra graphs
+par(mfrow = c(2,1))
+plot(y=imf_clean$ihs_inflation, x = imf_clean$year)
+best_fit_inflation_time <- lm(imf_clean$ihs_inflation ~ imf_clean$year)
+abline(best_fit_inflation_time, col = "red",lwd = 2)
 
+plot(y=imf_clean$ihs_unemployment, x = imf_clean$year)
+best_fit_unemployment_time <- lm(imf_clean$ihs_unemployment ~ imf_clean$year)
+abline(best_fit_unemployment_time, col = "blue",lwd = 2)
 
 # conclusions
 # 1. key regional differences:
